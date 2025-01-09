@@ -7,47 +7,111 @@ Contact: [Start Connecting? +31 6 57594183](tel:+31657594183)
 
 ## Introduction
 
-When integrating and automating systems within an enterprise, scalability and maintainability are critical. By leveraging Azure Container Apps and Infrastructure as Code (IaC) via [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/), you can deploy a **Boomi Atom or Molecule** in a consistent and repeatable manner—centralizing your integration landscape and reaping the benefits of an efficient, containerized environment.  
+By leveraging **Azure Container Apps** and **Infrastructure as Code (IaC)** via [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/), you can deploy a **Boomi Atom or Molecule** in a consistent, repeatable manner. This setup centralizes your integration landscape, ensuring scalability and maintainability.  
 
-In this tutorial, we'll walk through the **AVM Bicep template** configurations for creating:
-- An Azure Resource Group
-- A Virtual Network with subnets for Container Apps and Storage
-- A Storage Account with NFS enabled
-- A Log Analytics Workspace
-- An Azure Container Apps Environment
-- A Container App running a Boomi Atom or Molecule
+In this guide, we’ll demonstrate how to:
+- Create an Azure Resource Group
+- Provision a Virtual Network (VNet) with subnets for Container Apps and Storage
+- Set up a Storage Account (NFS enabled)
+- Deploy a Log Analytics Workspace
+- Set up a Container Apps Environment
+- Launch a Boomi Atom or Molecule as a Container App
 
-This guide assumes you have basic familiarity with:
+This tutorial assumes familiarity with:
 - Azure Resource Manager (ARM) or Bicep  
-- Container concepts  
-- Boomi Installation Tokens and environment configurations  
+- Containerization basics  
+- Boomi Installer Tokens and environment configurations  
 
-If you're new to Bicep, visit the [official documentation](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) to get started.
+For those new to Bicep, check out the [official documentation](https://learn.microsoft.com/azure/azure-resource-manager/bicep/).
 
 ---
 
 ## Prerequisites
 
 1. **Azure Subscription**  
-   Make sure you have an active Azure subscription and the appropriate permissions (e.g., Owner or Contributor) on the target subscription.
-
+   - An active Azure subscription with permissions to create resources (e.g., Owner or Contributor).
 2. **Azure CLI or PowerShell**  
-   You’ll need either the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) or [PowerShell with the Az module](https://learn.microsoft.com/powershell/azure/install-az-ps) to deploy the Bicep templates.
-
-3. **Bicep CLI**  
-   Although you can deploy `.bicep` files directly using the latest Azure CLI, installing the [Bicep CLI](https://learn.microsoft.com/azure/azure-resource-manager/bicep/install) locally can be helpful if you plan to build or validate templates offline.
-
-4. **Boomi Token & Container Version**  
-   - **Boomi Installer Token** (`boomiInstallerToken`): A secure token retrieved from Boomi that must be updated after each usage.
-   - **Boomi Container Version** (`boomiContainerVersion`): The type of Boomi runtime you want to run (e.g., `atom:release`, `molecule:release`).
+   - Install [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) or  
+   - [PowerShell with the Az module](https://learn.microsoft.com/powershell/azure/install-az-ps)
+3. **Bicep CLI** (optional)  
+   - The [Bicep CLI](https://learn.microsoft.com/azure/azure-resource-manager/bicep/install) can be used locally to compile or validate templates if needed.
+4. **Boomi Installer Token & Container Version**  
+   - A valid **Boomi Installer Token** that must be refreshed regularly.  
+   - The **Boomi Container Version**, e.g., `atom:release`, `molecule:release`, etc.
 
 ---
 
 ## File Structure
 
-You’ll have two main files in your project:
+Within your GitHub repository, you’ll have two files:
 
-1. **`main.bicep`**: The primary infrastructure definition file (see code below).  
-2. **`main.parameters.json`**: Parameter values for your deployment (see code below).
+1. **`main.bicep`**  
+2. **`main.parameters.json`**
 
+These files define the entire deployment. **You can find them in your repository and reference them directly from there.**
 
+---
+
+## main.bicep
+
+The [`main.bicep`](./main.bicep) file contains all the resources needed to spin up a Boomi Atom or Molecule on Azure Container Apps, including:
+- Resource Group creation
+- Virtual Network (with AVM module)
+- Storage Account setup with NFS shares
+- Log Analytics Workspace
+- Managed Container Apps Environment
+- Boomi Container App deployment
+
+> **Check the code in your GitHub repo** for the full Bicep configuration.
+
+---
+
+## main.parameters.json
+
+The [`main.parameters.json`](./main.parameters.json) file contains the parameter values (e.g., names, IDs, locations, Boomi tokens, etc.) needed to customize your deployment.
+
+> **Remember** to replace placeholder values (e.g., subscription ID, Boomi token) with valid entries before deployment.
+
+---
+
+## Deployment Steps
+
+1. **Sign in to Azure**  
+   ```bash
+   az login
+Select the Azure subscription (if you have multiple)
+
+bash
+Copy code
+az account set --subscription "<Your Subscription ID>"
+Validate the Bicep file (optional)
+
+bash
+Copy code
+az deployment sub what-if \
+  --template-file main.bicep \
+  --parameters @main.parameters.json
+Deploy
+
+bash
+Copy code
+az deployment sub create \
+  --name BoomiAtomOrMoleculeDeployment \
+  --template-file main.bicep \
+  --parameters @main.parameters.json
+This command will create or update Azure resources (VNet, Storage, Container App Environment, etc.) and deploy the Boomi Atom/Molecule as a Container App.
+
+Verification
+
+Go to the Azure Portal and confirm the new resources in your Resource Group.
+Ensure that your Boomi Atom or Molecule is online in the Boomi platform, corresponding to the environment you specified.
+Troubleshooting
+Invalid or Expired Boomi Token
+
+Refresh your Boomi Installer Token and update the parameter file accordingly.
+Networking or Permission Issues
+
+Verify subnet configurations, private endpoints, and IAM roles.
+Performance & Scaling
+
+For increased workload, adjust scaleMaxReplicas for a Molecule deployment, ensuring your environment can handle multiple replicas.
