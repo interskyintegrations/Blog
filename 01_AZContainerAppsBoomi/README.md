@@ -50,5 +50,4 @@ You’ll have two main files in your project:
 1. **`main.bicep`**: The primary infrastructure definition file (see code below).  
 2. **`main.parameters.json`**: Parameter values for your deployment (see code below).
 
-The file structure could look like this:
-. ├─ main.bicep └─ main.parameters.json
+
