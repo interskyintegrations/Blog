@@ -25,6 +25,7 @@ This tutorial assumes familiarity with:
 For those new to Bicep, check out the [official documentation](https://learn.microsoft.com/azure/azure-resource-manager/bicep/).
 
 ---
+> **Note** This implementation is an easy example and not something you should deploy to PROD! Make sure to modify the template according your business needs and purpose and make sure to check both Boomi's and Azure's best practises.
 
 ## Prerequisites
 
@@ -38,17 +39,20 @@ For those new to Bicep, check out the [official documentation](https://learn.mic
 4. **Boomi Installer Token & Container Version**  
    - A valid **Boomi Installer Token** that must be refreshed regularly.  
    - The **Boomi Container Version**, e.g., `atom:release`, `molecule:release`, etc.
+5. **Boomi Environment ID**  
+   - A valid boomi environment ID guid is needed to connect the atom/molceule to a Boomi environment.
 
 ---
 
 ## File Structure
 
-Within your GitHub repository, you’ll have two files:
+Within this GitHub repository, we have two files:
 
 1. **`main.bicep`**  
 2. **`main.parameters.json`**
 
-These files define the entire deployment. **You can find them in your repository and reference them directly from there.**
+These files define the entire deployment.
+
 
 ---
 
@@ -83,22 +87,29 @@ Select the Azure subscription (if you have multiple)
 
 bash
 Copy code
+```
 az account set --subscription "<Your Subscription ID>"
 Validate the Bicep file (optional)
+```
 
 bash
 Copy code
+```
 az deployment sub what-if \
   --template-file main.bicep \
   --parameters @main.parameters.json
 Deploy
+```
 
 bash
 Copy code
+```
 az deployment sub create \
   --name BoomiAtomOrMoleculeDeployment \
   --template-file main.bicep \
   --parameters @main.parameters.json
+```
+
 This command will create or update Azure resources (VNet, Storage, Container App Environment, etc.) and deploy the Boomi Atom/Molecule as a Container App.
 
 Verification
