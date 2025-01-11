@@ -214,13 +214,6 @@ module containerApp 'br/public:avm/res/app/container-app:0.11.0' = {
     ]
     environmentResourceId: managedEnvironment.outputs.resourceId
     name: containerAppName
-    additionalPortMappings: [
-      {
-        exposedPort: 9090
-        external: false
-        targetPort: 9090
-      }
-    ]
     ingressAllowInsecure: false
     ingressExternal: false
     ingressTargetPort: 9090
