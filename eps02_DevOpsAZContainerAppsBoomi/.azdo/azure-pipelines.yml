@@ -1,0 +1,59 @@
+trigger:
+- manual
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+# Step 1: Validate and Update Boomi Environment
+- task: PowerShell@2
+  displayName: 'Validate and Update Boomi Environment'
+  inputs:
+    targetType: 'filePath'
+    filePath: '.\.azdo\validate-boomienv.ps1'
+    arguments: '-boomiBasicAuthUsername "$(boomiBasicAuthUsername)" -boomiBasicAuthPassword "$(boomiBasicAuthPassword)" -boomiAPIBaseUrl "$(boomiAPIBaseUrl)" -boomiEnvironmentId "$(boomiEnvironmentId)" -boomiEnvironmentName "$(boomiEnvironmentName)" -boomiEnvironmentClassification "$(boomiEnvironmentClassification)" -libraryGroup "$(libraryGroup)" -devopsPat "$(devopsPatVariableGroup)"'
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+  name: ValidateBoomiEnv
+
+  # Step 2: Validate Boomi Runtime
+- task: PowerShell@2
+  displayName: 'Validate Atom and Get Installer Token'
+  inputs:
+    targetType: 'filePath'
+    filePath: '.\.azdo\validate-boomiruntime.ps1'
+    arguments: '-boomiBasicAuthUsername "$(boomiBasicAuthUsername)" -boomiBasicAuthPassword "$(boomiBasicAuthPassword)" -boomiAPIBaseUrl "$(boomiAPIBaseUrl)" -boomiAtomName "$(boomiAtomName)" -boomiEnvironmentId "$(boomiEnvironmentId)" -boomiAtomOrMolecule "$(boomiAtomOrMolecule)"'
+  name: ValidateBoomiRuntime
+
+# Step 3: Deploy Bicep
+- task: AzureCLI@2
+  displayName: 'Azure Login and Deploy Bicep Template'
+  inputs:
+    azureSubscription: $(azureServiceConnection)
+    scriptType: 'pscore'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      Write-Host "Azure login successful."
+      # Start Bicep deployment
+      Write-Host "Starting deployment of Bicep template..."
+      az deployment sub create `
+          --location "$(azureResourceRegion)" `
+          --template-file "main.bicep" `
+          --parameters "@$(bicepParameterFile)" `
+          --parameters subscriptionId="$(subscriptionId)" `
+             boomiInstallerToken="$(ValidateBoomiRuntime.boomiInstallerToken)" `
+            boomiEnvironmentId="$(ValidateBoomiEnv.boomiEnvironmentId)" `
+            boomiAtomName="$(boomiAtomName)" `
+            boomiContainerVersion="$(boomiContainerVersion)"
+         
+      if ($LASTEXITCODE -ne 0) {
+          Write-Error "Deployment failed. Check logs for details."
+          exit $LASTEXITCODE
+      }
+
+      Write-Host "Bicep template deployed successfully."
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+  name: ValidateAtom
+  condition: succeeded()
+
