@@ -46,47 +46,33 @@ For those new to Bicep, check out the [official documentation](https://learn.mic
 ## High Level Design
 ```mermaid
     C4Context
-      title System Context diagram for Internet Banking System
-      Enterprise_Boundary(b0, "BankBoundary0") {
-        Person(customerA, "Banking Customer A", "A customer of the bank, with personal bank accounts.")
-        Person(customerB, "Banking Customer B")
-        Person_Ext(customerC, "Banking Customer C", "desc")
+title Boomi/Azure Hybrid Environment - Infrastructure Setup
 
-        Person(customerD, "Banking Customer D", "A customer of the bank, <br/> with personal bank accounts.")
+Boundary(LocalMachine, "Local Machine") {
+    Person(DevOps, "DevOps Engineer", "Deploys infrastructure using Bicep templates and Azure CLI")
+}
 
-        System(SystemAA, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.")
+Boundary(Azure, "Azure Cloud") {
+    System_Boundary(RG, "Azure Resource Group (RG)") {
+        System(VNet, "Virtual Network", "Provisioned with subnets for Container Apps and Storage")
+        System(Storage, "Storage Account", "NFS-enabled for Boomi data")
+        System(Logs, "Log Analytics Workspace", "Tracks logs and metrics")
+        System(ManagedEnv, "Container Apps Environment", "Manages the containerized Boomi runtime")
+        System(AtomApp, "Boomi Atom/Molecule", "Runs as a container in Azure Container Apps")
+    }
+}
 
-        Enterprise_Boundary(b1, "BankBoundary") {
+Rel(DevOps, VNet, "Deploys via Bicep (AVM module)")
+Rel(DevOps, Storage, "Deploys via Bicep (NFS enabled)")
+Rel(DevOps, Logs, "Deploys via Bicep")
+Rel(DevOps, ManagedEnv, "Deploys via Bicep")
+Rel(DevOps, AtomApp, "Deploys via Bicep with Boomi image")
+Rel(VNet, Storage, "Connected via dedicated subnet")
+Rel(VNet, ManagedEnv, "Connected via delegated subnet")
+Rel(ManagedEnv, AtomApp, "Hosts the Boomi Atom/Molecule container")
+Rel(AtomApp, Storage, "Accesses data via NFS")
+Rel(AtomApp, Logs, "Pushes runtime logs and metrics")
 
-          SystemDb_Ext(SystemE, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
-
-          System_Boundary(b2, "BankBoundary2") {
-            System(SystemA, "Banking System A")
-            System(SystemB, "Banking System B", "A system of the bank, with personal bank accounts. next line.")
-          }
-
-          System_Ext(SystemC, "E-mail system", "The internal Microsoft Exchange e-mail system.")
-          SystemDb(SystemD, "Banking System D Database", "A system of the bank, with personal bank accounts.")
-
-          Boundary(b3, "BankBoundary3", "boundary") {
-            SystemQueue(SystemF, "Banking System F Queue", "A system of the bank.")
-            SystemQueue_Ext(SystemG, "Banking System G Queue", "A system of the bank, with personal bank accounts.")
-          }
-        }
-      }
-
-      BiRel(customerA, SystemAA, "Uses")
-      BiRel(SystemAA, SystemE, "Uses")
-      Rel(SystemAA, SystemC, "Sends e-mails", "SMTP")
-      Rel(SystemC, customerA, "Sends e-mails to")
-
-      UpdateElementStyle(customerA, $fontColor="red", $bgColor="grey", $borderColor="red")
-      UpdateRelStyle(customerA, SystemAA, $textColor="blue", $lineColor="blue", $offsetX="5")
-      UpdateRelStyle(SystemAA, SystemE, $textColor="blue", $lineColor="blue", $offsetY="-10")
-      UpdateRelStyle(SystemAA, SystemC, $textColor="blue", $lineColor="blue", $offsetY="-40", $offsetX="-50")
-      UpdateRelStyle(SystemC, customerA, $textColor="red", $lineColor="red", $offsetX="-50", $offsetY="20")
-
-      UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 ```
 
 ---
