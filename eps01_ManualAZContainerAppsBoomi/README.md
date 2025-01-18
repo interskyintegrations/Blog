@@ -43,7 +43,33 @@ For those new to Bicep, check out the [official documentation](https://learn.mic
    - A valid boomi environment ID guid is needed to connect the atom/molceule to a Boomi environment.
 
 ---
+## High Level Design
+```mermaid
+architecture-beta
+    service dns(logos:aws-route53)[Route 53]
+    service cf(logos:aws-cloudfront)[CloudFront]
+    service lb(logos:aws-ec2)[Load Balancer]
+    service ui(logos:nextjs)[UI]
+    service gateway(logos:aws-api-gateway)[API Gateway]
+    service auth(logos:aws-lambda)[Auth Service]
+    service authDb(logos:aws-dynamodb)[Auth DB]
+    auth:R --> L:authDb
+    service blog(logos:aws-lambda)[Blog Service]
+    service blogDb(logos:aws-dynamodb)[Blog DB]
+    blog:R --> L:blogDb
+    service analytics(logos:aws-lambda)[Analytics Service]
+    service analyticsIndex(logos:aws-open-search)[OpenSearch]
+    analytics:R --> L:analyticsIndex
+    dns:R --> L:cf
+    cf:R --> L:lb
+    lb:B --> T:ui
+    cf:R --> L:gateway
+    gateway:R --> L:auth
+    gateway:R --> L:blog
+    gateway:R --> L:analytics
+```
 
+---
 ## File Structure
 
 Within this GitHub repository, we have two files:
