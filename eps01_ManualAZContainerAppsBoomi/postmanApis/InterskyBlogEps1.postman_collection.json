@@ -1,0 +1,276 @@
+{
+	"info": {
+		"_postman_id": "3d701c2c-b5e5-4431-b3dc-8f42f4d62827",
+		"name": "InterskyBlogEps1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14045148"
+	},
+	"item": [
+		{
+			"name": "BoomiInstallerToken",
+			"item": [
+				{
+					"name": "Creates an InstallerToken object.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{basicAuthUsername}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{basicAuthPassword}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"durationMinutes\": \"1440\",\n  \"installType\": \"ATOM\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}{{accountId}}/InstallerToken",
+							"host": [
+								"{{baseUrl}}{{accountId}}"
+							],
+							"path": [
+								"InstallerToken"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful request and response.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/xml"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic <credentials>",
+										"description": "Added as a part of security scheme: basic"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"accountId\": \"<string>\",\n  \"cloudId\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"durationMinutes\": \"<integer>\",\n  \"expiration\": \"<dateTime>\",\n  \"installType\": \"MOLECULE\",\n  \"token\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/InstallerToken",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"InstallerToken"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Sunset",
+									"value": "",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								},
+								{
+									"key": "Warning",
+									"value": "",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								},
+								{
+									"key": "Deprecation",
+									"value": "",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								},
+								{
+									"key": "Link",
+									"value": "",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"accountId\": \"<string>\",\n  \"cloudId\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"durationMinutes\": \"<integer>\",\n  \"expiration\": \"<dateTime>\",\n  \"installType\": \"MOLECULE\",\n  \"token\": \"<string>\"\n}"
+						},
+						{
+							"name": "Missing or incorrect authentication credentials.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic <credentials>",
+										"description": "Added as a part of security scheme: basic"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"accountId\": \"<string>\",\n  \"cloudId\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"durationMinutes\": \"<integer>\",\n  \"expiration\": \"<dateTime>\",\n  \"installType\": \"MOLECULE\",\n  \"token\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/InstallerToken",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"InstallerToken"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Endpoint is invalid or no longer exists.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic <credentials>",
+										"description": "Added as a part of security scheme: basic"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"accountId\": \"<string>\",\n  \"cloudId\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"durationMinutes\": \"<integer>\",\n  \"expiration\": \"<dateTime>\",\n  \"installType\": \"MOLECULE\",\n  \"token\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/InstallerToken",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"InstallerToken"
+									]
+								}
+							},
+							"status": "Gone",
+							"code": 410,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The Boomi server is currently unavailable or your account's rate limits have been exceeded. Retry the request at a later time.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic <credentials>",
+										"description": "Added as a part of security scheme: basic"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"accountId\": \"<string>\",\n  \"cloudId\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"durationMinutes\": \"<integer>\",\n  \"expiration\": \"<dateTime>\",\n  \"installType\": \"MOLECULE\",\n  \"token\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/InstallerToken",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"InstallerToken"
+									]
+								}
+							},
+							"status": "Service Unavailable",
+							"code": 503,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	]
+}
