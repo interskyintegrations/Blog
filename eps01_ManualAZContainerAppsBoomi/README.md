@@ -7,7 +7,7 @@ Contact: [Start Connecting? +31 6 57594183](tel:+31657594183)
 
 ## Introduction
 
-By leveraging **Azure Container Apps** and **Infrastructure as Code (IaC)** via [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/), you can deploy a **Boomi Atom or Molecule** in a consistent, repeatable manner. This setup centralizes your integration landscape, ensuring scalability and maintainability.  
+By using **Azure Container Apps** and **Infrastructure as Code (IaC)** via [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/), you can deploy a **Boomi Atom or Molecule** in a consistent, repeatable manner. This setup centralizes your integration landscape, ensuring scalability and maintainability.  
 
 In this guide, we’ll demonstrate how to:
 - Create an Azure Resource Group
