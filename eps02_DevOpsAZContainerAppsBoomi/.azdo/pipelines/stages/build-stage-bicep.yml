@@ -9,12 +9,12 @@ jobs:
   steps:
     #Build bicep file
     - task: AzureCLI@2
-    displayName: Azure CLI Bicep Build
-    inputs:
-      scriptType: "bash"
-      scriptLocation: inlineScript
-      inlineScript: |
-        az bicep build -f ${{parameters.bicep.templateFile}}
+      displayName: Azure CLI Bicep Build
+      inputs:
+        scriptType: "bash"
+        scriptLocation: inlineScript
+        inlineScript: |
+          az bicep build -f ${{parameters.bicep.templateFile}}
 
   # Publish bicep file into azure devops artifacts
   - ${{ each artifact in parameters.artifacts}}:
