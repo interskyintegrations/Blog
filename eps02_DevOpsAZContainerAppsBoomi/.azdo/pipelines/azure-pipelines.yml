@@ -21,9 +21,9 @@ steps:
   displayName: List Environment Variables
 
 - script: |
-    echo "Azure Service Connection: ${{ variables.azureServiceConnection }}"
-    echo "Subscription ID: ${{ variables.subscriptionId }}"
-    echo "Location: ${{ variables.AZURERESOURCEREGION }}"
+    echo "Boomi Account ID: $BOOMIACCOUNTID"
+    echo "Boomi Environment Classification: $BOOMIENVIRONMENTCLASSIFICATION"
+    echo "Azure Resource Region: $AZURERESOURCEREGION"
   displayName: Test Variable Group
 
 
