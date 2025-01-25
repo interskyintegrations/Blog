@@ -16,13 +16,15 @@ name: $(BuildDefinitionName).$(Year:yy)$(DayOfYear)$(rev:.r)
 # Call the build process template
 stages:
 - stage: Build
+  variables:
+  - group: boomi-dev
   jobs:
   - template: stages/build-stage-bicep.yml
     parameters:
       artifacts:
         - name: bicep-artifact
           templateDirectory: infra
-      azureSubscription: ${{ variables.subscriptionId }}
+      # azureSubscription: ${{ variables.subscriptionId }}
       bicep:
         templateFile: infra/main.bicep
       pool:
