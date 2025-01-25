@@ -44,6 +44,15 @@ param containerAppSubnetResourceId string = '/subscriptions/${subscriptionId}/re
 @description('Subnet Resource ID for the Storage Account')
 param storageAccountSubnetResourceId string = '/subscriptions/${subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.Network/virtualNetworks/${vnetName}/subnets/${storageAccountSubnetName}'
 
+@description('Address range for the Virtual Network')
+param vnetAddressPrefix string
+
+@description('Address range for the Container App Subnet')
+param containerAppSubnetAddressPrefix string
+
+@description('Address range for the Storage Account Subnet')
+param storageAccountSubnetAddressPrefix string
+
 // -------------------------------------
 // Boomi Parameters
 // -------------------------------------
@@ -77,8 +86,7 @@ module virtualNetwork 'br/public:avm/res/network/virtual-network:0.5.2' = {
   params: {
     // Required parameters
     addressPrefixes: [
-      '10.0.0.0/22'
-      'fd00:592b:3014::/64'
+      vnetAddressPrefix
     ]
     name: vnetName
     // Non-required parameters
@@ -86,13 +94,13 @@ module virtualNetwork 'br/public:avm/res/network/virtual-network:0.5.2' = {
     subnets: [
       {
         addressPrefixes: [
-          '10.0.0.0/23' // Subnet for Container App
+          containerAppSubnetAddressPrefix
         ]
         name: containerAppSubnetName
       }
       {
         addressPrefixes: [
-          '10.0.2.0/23' // Subnet for Storage Account
+          storageAccountSubnetAddressPrefix
         ]
         name: storageAccountSubnetName
       }

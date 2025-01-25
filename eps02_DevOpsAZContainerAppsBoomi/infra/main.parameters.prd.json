@@ -34,6 +34,15 @@
     },
     "boomiContainerVersion": {
       "value": "atom:release"
+    },
+    "vnetAddressPrefix": {
+      "value": "10.1.0.0/16"
+    },
+    "containerAppSubnetAddressPrefix": {
+      "value": "10.1.0.0/24"
+    },
+    "storageAccountSubnetAddressPrefix": {
+      "value": "10.1.1.0/24"
     }
   }
 }
