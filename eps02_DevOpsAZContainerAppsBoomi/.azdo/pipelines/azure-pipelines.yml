@@ -23,7 +23,7 @@ steps:
 - script: |
     echo "Azure Service Connection: ${{ variables.azureServiceConnection }}"
     echo "Subscription ID: ${{ variables.subscriptionId }}"
-    echo "Location: ${{ variables.azureResourceRegion }}"
+    echo "Location: ${{ variables.AZURERESOURCEREGION }}"
   displayName: Test Variable Group
 
 
