@@ -36,7 +36,7 @@
   
   - stage: Development 
     dependsOn: Build
-    condition: succeeded()
+    condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
     variables:
     - group: boomi-dev
     jobs:
@@ -52,5 +52,23 @@
         devOpsEnvironment: Development
         pool:
           name: 'Azure Pipelines'
-  
+          
+  - stage: Production 
+    dependsOn: Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    variables:
+    - group: boomi-prod
+    jobs:
+    - template: stages/release-stage-bicep.yml
+      parameters:
+        name: 'BicepDeploy'
+        azureSubscription:  $(AZURESERVICECONNECTION)
+        bicep: 
+          artifactName: bicep-artifact
+          parametersFile: $(BICEPPARAMETERFILE)
+          location: $(AZURERESOURCEREGION)
+          templateFile: main.bicep
+        devOpsEnvironment: Production
+        pool:
+          name: 'Azure Pipelines'
   

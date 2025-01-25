@@ -28,6 +28,12 @@
     },
     "resourceGroupName": {
       "value": "rg-demo-dev"
+    },
+    "boomiAtomName": {
+      "value": "BoomiAtomDev"
+    },
+    "boomiContainerVersion": {
+      "value": "atom:release"
     }
   }
 }
