@@ -43,7 +43,7 @@
     - template: stages/release-stage-bicep.yml
       parameters:
         name: 'BicepDeploy'
-        azureSubscription:  ${{ variables.azureServiceConnection }}
+        azureSubscription:  $(AZURESERVICECONNECTION)
         bicep: 
           artifactName: bicep-artifact
           parametersFile: $(BICEPPARAMETERFILE)
