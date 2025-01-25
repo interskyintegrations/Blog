@@ -7,7 +7,7 @@ jobs:
     clean: all
 
   steps:
-    #Build bicep file
+    # Build Bicep file
     - task: AzureCLI@2
       displayName: Azure CLI Bicep Build
       inputs:
@@ -16,9 +16,8 @@ jobs:
         inlineScript: |
           az bicep build -f ${{parameters.bicep.templateFile}}
 
-  # Publish bicep file into azure devops artifacts
-    - ${{ each artifact in parameters.artifacts}}:
-      - publish: ${{parameters.templateDirectory}}
-        displayName: Publish Artifacts ${{parameters.artifactName}}
-        artifact: ${{parameters.artifactName}}
-
+    # Publish Bicep file into Azure DevOps artifacts
+    - ${{ each artifact in parameters.artifacts }}:
+        - publish: ${{artifact.templateDirectory}}
+          displayName: Publish Artifacts ${{artifact.name}}
+          artifact: ${{artifact.name}}

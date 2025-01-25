@@ -17,14 +17,13 @@ name: $(BuildDefinitionName).$(Year:yy)$(DayOfYear)$(rev:.r)
 stages:
 - stage: Build
   variables:
-  - group: boomi-dev
+  - group: boomi-dev 
   jobs:
   - template: stages/build-stage-bicep.yml
     parameters:
       artifacts:
         - name: bicep-artifact
           templateDirectory: infra
-      # azureSubscription: ${{ variables.subscriptionId }}
       bicep:
         templateFile: infra/main.bicep
       pool:
