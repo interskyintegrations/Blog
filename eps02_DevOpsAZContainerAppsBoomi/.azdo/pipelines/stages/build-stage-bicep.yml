@@ -10,7 +10,6 @@ jobs:
     # Build Bicep file
     - task: AzureCLI@2
       displayName: Azure CLI Bicep Build
-      azureSubscription: ${{parameters.azureSubscription}}
       inputs:
         azureSubscription: ${{parameters.azureSubscription}}
         scriptType: "bash"
