@@ -13,10 +13,13 @@ jobs:
         deploy:
           steps:     
             - task: AzureCLI@2
-                displayName: Azure CLI Bicep Release
-                inputs:
-                  azureSubscription: ${{parameters.azureSubscription}}
-                  scriptType: "bash"
-                  scriptLocation: inlineScript
-                  inlineScript: |
-                    az deployment sub create -f $(Pipeline.Workspace)/${{parameters.bicep.artifactName}}/${{parameters.bicep.templateFile}} --location ${{parameters.bicep.location}}  -p ${{parameters.bicep.parameters}} $(Pipeline.Workspace)/${{parameters.bicep.artifactName}}/${{parameters.bicep.parametersFile}}
+              displayName: Azure CLI Bicep Release
+              inputs:
+                azureSubscription: ${{parameters.azureSubscription}}
+                scriptType: "bash"
+                scriptLocation: inlineScript
+                inlineScript: |
+                  az deployment sub create \
+                    -f $(Pipeline.Workspace)/${{parameters.bicep.artifactName}}/${{parameters.bicep.templateFile}} \
+                    --location ${{parameters.bicep.location}} \
+                    -p $(Pipeline.Workspace)/${{parameters.bicep.artifactName}}/${{parameters.bicep.parametersFile}}
