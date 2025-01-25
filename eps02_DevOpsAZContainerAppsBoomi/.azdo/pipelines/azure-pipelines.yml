@@ -26,8 +26,8 @@ stages:
     steps:
       - script: |
           echo "Azure Service Connection: ${{ variables.azureServiceConnection }}"
-          echo "Resource Group Name: ${{ variables.devResourceGroupName }}"
-          echo "Location: ${{ variables.location }}"
+          echo "subscriptionId: ${{ variables.subscriptionId }}"
+          echo "Location: ${{ variables.azureResourceRegion }}"
         displayName: Debug Build Variables
   - template: stages/build-stage-bicep.yml
     parameters:
