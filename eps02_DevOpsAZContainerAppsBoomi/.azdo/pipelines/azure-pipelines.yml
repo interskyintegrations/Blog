@@ -24,6 +24,7 @@ stages:
       artifacts:
         - name: bicep-artifact
           templateDirectory: infra
+      azureSubscription: ${{ variables.azureServiceConnection }}
       bicep:
         templateFile: infra/main.bicep
       pool:
