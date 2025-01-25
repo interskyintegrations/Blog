@@ -27,7 +27,7 @@ jobs:
                     --parameters @"$(Pipeline.Workspace)/${{ parameters.bicep.artifactName }}/$(BICEPPARAMETERFILE)" \
                     --parameters \
                       location="$(AZURERESOURCEREGION)" \
-                      subscriptionId="$(SUBSCRIPTIONID)" \
+                      subscriptionId="$(AZURESUBSCRIPTIONID)" \
                       boomiEnvironmentId="$(BOOMIENVIRONMENTID)" \
                       boomiInstallerToken="$(BOOMIINSTALLERTOKEN)"
 
