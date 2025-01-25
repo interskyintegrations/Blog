@@ -71,4 +71,3 @@
         devOpsEnvironment: Production
         pool:
           name: 'Azure Pipelines'
-  

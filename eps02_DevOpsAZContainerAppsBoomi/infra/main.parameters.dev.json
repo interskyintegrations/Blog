@@ -9,10 +9,10 @@
       "value": "boomi-demo-dev-vnet"
     },
     "containerAppSubnetName": {
-      "value": "ca-subnetName"
+      "value": "ca-subnetName-dev"
     },
     "storageAccountSubnetName": {
-      "value": "sa-subnetName"
+      "value": "sa-subnetName-dev"
     },
     "storageAccountName": {
       "value": "boomidemodevsa"

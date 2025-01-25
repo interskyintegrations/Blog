@@ -9,10 +9,10 @@
       "value": "boomi-demo-prd-vnet"
     },
     "containerAppSubnetName": {
-      "value": "ca-subnetname"
+      "value": "ca-subnetname-prd"
     },
     "storageAccountSubnetName": {
-      "value": "sa-subnetname"
+      "value": "sa-subnetname-prd"
     },
     "storageAccountName": {
       "value": "boomidemoprdsa"
