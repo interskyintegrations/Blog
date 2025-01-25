@@ -1,0 +1,25 @@
+jobs:
+- job: buildAndVerifyBicep
+  displayName: Build/Verification
+  continueOnError: false
+  pool: ${{parameters.pool}}
+  workspace:
+    clean: all
+
+  steps:
+    #Build bicep file
+    - task: AzureCLI@2
+    displayName: Azure CLI Bicep Build
+    inputs:
+      azureSubscription: ${{parameters.azureSubscription}}
+      scriptType: "bash"
+      scriptLocation: inlineScript
+      inlineScript: |
+        az bicep build -f ${{parameters.bicep.templateFile}}
+
+  # Publish bicep file into azure devops artifacts
+  - ${{ each artifact in parameters.artifacts}}:
+    - publish: ${{parameters.templateDirectory}}
+      displayName: Publish Artifacts ${{parameters.artifactName}}
+      artifact: ${{parameters.artifactName}}
+

@@ -1,0 +1,66 @@
+## CI pipeline will be started on every branch
+# Pipeline requires the folowing pipeline variables:
+
+trigger:
+  batch: true
+  branches:
+    include:    
+    - main
+    - feature/*
+
+pr: none
+
+# Use build definition name for build/release numbers
+name: $(BuildDefinitionName).$(Year:yy)$(DayOfYear)$(rev:.r)
+
+# Call the build process template
+stages:
+- stage: Build
+  jobs:
+  - template: stages/build-stage-bicep.yml
+    parameters:
+      artifacts:
+        - name: bicep-artifact
+          templateDirectory: infra
+      azureSubscription: ${{ variables.devAzureSubscription }}
+      bicep:
+        templateFile: infra/main.bicep
+      pool:
+        name: 'Azure Pipelines'
+
+- stage: Development 
+  dependsOn: Build
+  condition: succeeded()
+  variables:
+  - group: boomi-dev
+  jobs:
+  - template: stages/release-stage-bicep-function-app.yml
+    parameters:
+      name: 'BicepDeploy'
+      azureSubscription:  ${{ variables.azureServiceConnection }}
+      bicep: 
+        artifactName: bicep-artifact
+        parametersFile: main.parameters.dev.json
+        resourceGroupName: ${{ variables.devResourceGroupName }} 
+        location: ${{ variables.location }}
+        templateFile: main.bicep
+      devOpsEnvironment: Development
+      pool:
+        name: 'Azure Pipelines'
+  - template: stages/release-stage-bicep.yml
+    parameters:
+      name: 'BicepDeploy'
+      azureSubscription: ${{ variables.azureServiceConnection }}
+      bicep: 
+        artifactName: bicep-artifact
+        parametersFile: main.parameters.dev.json
+        resourceGroupName: ${{ variables.devResourceGroupName }} 
+        location: ${{ variables.location }}
+        parameters: 
+        templateFile: api.bicep
+      devOpsEnvironment: ${{ variables.devDevopsEnvironment }}
+      pool:
+        name: 'Azure Pipelines'
+      dependsOn:
+      - BicepDeploy
+      condition: succeeded()

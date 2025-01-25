@@ -2,17 +2,8 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "rgName": {
-      "value": "boomi-demo-dev-rg"
-    },
-    "location": {
-      "value": "westeurope"
-    },
     "containerAppName": {
       "value": "boomi-demo-dev-containerapp"
-    },
-    "subscriptionId": {
-      "value": "${subscriptionId}"
     },
     "vnetName": {
       "value": "boomi-demo-dev-vnet"
@@ -29,20 +20,11 @@
     "logAnalyticsWorkspaceName": {
       "value": "boomi-demo-dev-law"
     },
+    "appInsightsName": {
+      "value": "boomi-demo-dev-appinsight"
+    },
     "managedEnvironmentName": {
       "value": "boomidemodevmenv"
-    },
-    "boomiAtomName": {
-      "value": "BoomiAtomName"
-    },
-    "boomiInstallerToken": {
-      "value": "${boomiInstallerToken}"
-    },
-    "boomiContainerVersion": {
-      "value": "atom:release"
-    },
-    "boomiEnvironmentId": {
-      "value": "${boomiEnvironmentId}"
     }
   }
 }

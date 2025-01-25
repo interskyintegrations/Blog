@@ -2,17 +2,11 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "rgName": {
-      "value": "boomi-vm-demo-dev-rg"
-    },
-    "location": {
-      "value": "westeurope"
-    },
     "containerAppName": {
-      "value": "boomi-demo-dev-containerapp"
+      "value": "boomi-demo-prd-containerapp"
     },
     "vnetName": {
-      "value": "boomi-demo-dev-vnet"
+      "value": "boomi-demo-prd-vnet"
     },
     "containerAppSubnetName": {
       "value": "ca-subnetName"
@@ -21,16 +15,16 @@
       "value": "sa-subnetName"
     },
     "storageAccountName": {
-      "value": "boomidemodevsa"
+      "value": "boomidemoprdsa"
     },
     "logAnalyticsWorkspaceName": {
-      "value": "boomi-demo-dev-law"
+      "value": "boomi-demo-prd-law"
     },
     "appInsightsName": {
-      "value": "boomi-demo-dev-appinsight"
+      "value": "boomi-demo-prd-appinsight"
     },
     "managedEnvironmentName": {
-      "value": "boomidemodevmenv"
+      "value": "boomidemoprdmenv"
     }
   }
 }

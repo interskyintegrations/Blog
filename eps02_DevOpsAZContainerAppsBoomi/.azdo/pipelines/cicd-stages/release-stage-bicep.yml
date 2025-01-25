@@ -1,0 +1,22 @@
+jobs:
+  - deployment: ${{parameters.name}}  
+    environment: ${{parameters.devOpsEnvironment}}
+    continueOnError: false
+    dependsOn: ${{parameters.dependsOn}} 
+    condition: ${{parameters.condition}} 
+    pool: ${{ parameters.pool }}
+    workspace:
+      clean: all
+
+    strategy: 
+      runOnce:
+        deploy:
+          steps:     
+            - task: AzureCLI@2
+                displayName: Azure CLI Bicep Release
+                inputs:
+                  azureSubscription: ${{parameters.azureSubscription}}
+                  scriptType: "bash"
+                  scriptLocation: inlineScript
+                  inlineScript: |
+                    az deployment group create -f $(Pipeline.Workspace)/${{parameters.bicep.artifactName}}/${{parameters.bicep.templateFile}} -g ${{parameters.bicep.resourceGroupName}} -p ${{parameters.bicep.parameters}} $(Pipeline.Workspace)/${{parameters.bicep.artifactName}}/${{parameters.bicep.parametersFile}}

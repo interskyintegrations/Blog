@@ -9,7 +9,7 @@ targetScope = 'subscription'
 param subscriptionId string
 
 @description('Name of the new Resource Group to create')
-param rgName string
+param resourceGroupName string
 
 @description('Region where all resources will be deployed')
 param location string
@@ -39,10 +39,10 @@ param appInsightsName string
 param storageAccountName string
 
 @description('Subnet Resource ID for the Container App')
-param containerAppSubnetResourceId string = '/subscriptions/${subscriptionId}/resourceGroups/${rgName}/providers/Microsoft.Network/virtualNetworks/${vnetName}/subnets/${containerAppSubnetName}'
+param containerAppSubnetResourceId string = '/subscriptions/${subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.Network/virtualNetworks/${vnetName}/subnets/${containerAppSubnetName}'
 
 @description('Subnet Resource ID for the Storage Account')
-param storageAccountSubnetResourceId string = '/subscriptions/${subscriptionId}/resourceGroups/${rgName}/providers/Microsoft.Network/virtualNetworks/${vnetName}/subnets/${storageAccountSubnetName}'
+param storageAccountSubnetResourceId string = '/subscriptions/${subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.Network/virtualNetworks/${vnetName}/subnets/${storageAccountSubnetName}'
 
 // -------------------------------------
 // Boomi Parameters
@@ -65,7 +65,7 @@ param boomiEnvironmentId string
 //------------------------------------
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   location: location
-  name: rgName
+  name: resourceGroupName
 }
 
 // ------------------------------------
