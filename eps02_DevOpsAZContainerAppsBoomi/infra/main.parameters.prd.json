@@ -39,10 +39,10 @@
       "value": "10.1.0.0/16"
     },
     "containerAppSubnetAddressPrefix": {
-      "value": "10.1.0.0/23"
+      "value": "10.1.1.0/23"
     },
     "storageAccountSubnetAddressPrefix": {
-      "value": "10.1.1.0/24"
+      "value": "10.1.2.0/23"
     },
     "platformReservedCidr": {
       "value": "172.18.17.0/2"
