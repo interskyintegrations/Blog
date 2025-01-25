@@ -19,16 +19,24 @@ stages:
   variables:
   - group: boomi-dev 
   jobs:
-  - template: stages/build-stage-bicep.yml
-    parameters:
-      artifacts:
-        - name: bicep-artifact
-          templateDirectory: infra
-      azureSubscription: ${{ variables.AZURESERVICECONNECTION }}
-      bicep:
-        templateFile: infra/main.bicep
+    - job: ListAllVars
+      displayName: List All Variables
       pool:
         name: 'Azure Pipelines'
+      steps:
+      - script: |
+          echo "Listing all environment variables:"
+          printenv | sort
+    - template: stages/build-stage-bicep.yml
+      parameters:
+        artifacts:
+          - name: bicep-artifact
+            templateDirectory: infra
+        azureSubscription: ${{ variables.AZURESERVICECONNECTION }}
+        bicep:
+          templateFile: infra/main.bicep
+        pool:
+          name: 'Azure Pipelines'
 
 # - stage: Development 
 #   dependsOn: Build
