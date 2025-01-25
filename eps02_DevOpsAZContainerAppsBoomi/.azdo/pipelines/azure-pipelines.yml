@@ -7,8 +7,8 @@ trigger:
     include:    
     - main
     - feature/*
-    paths:
-      include:
+  paths:
+    include:
       - eps02_DevOpsAZContainerAppsBoomi/*
 pr: none
 
@@ -28,7 +28,7 @@ stages:
         artifacts:
           - name: bicep-artifact
             templateDirectory: infra
-        azureSubscription: ${{AZURESERVICECONNECTION}}
+        azureSubscription: ${{variables.AZURESERVICECONNECTION}}
         bicep:
           templateFile: eps02_DevOpsAZContainerAppsBoomi/infra/main.bicep
         pool:
