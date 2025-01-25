@@ -17,8 +17,8 @@ jobs:
           az bicep build -f ${{parameters.bicep.templateFile}}
 
   # Publish bicep file into azure devops artifacts
-  - ${{ each artifact in parameters.artifacts}}:
-    - publish: ${{parameters.templateDirectory}}
-      displayName: Publish Artifacts ${{parameters.artifactName}}
-      artifact: ${{parameters.artifactName}}
+    - ${{ each artifact in parameters.artifacts}}:
+      - publish: ${{parameters.templateDirectory}}
+        displayName: Publish Artifacts ${{parameters.artifactName}}
+        artifact: ${{parameters.artifactName}}
 
