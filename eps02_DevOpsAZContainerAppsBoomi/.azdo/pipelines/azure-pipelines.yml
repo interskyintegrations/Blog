@@ -47,19 +47,4 @@ stages:
       devOpsEnvironment: Development
       pool:
         name: 'Azure Pipelines'
-  - template: stages/release-stage-bicep.yml
-    parameters:
-      name: 'BicepDeploy'
-      azureSubscription: ${{ variables.azureServiceConnection }}
-      bicep: 
-        artifactName: bicep-artifact
-        parametersFile: main.parameters.dev.json
-        location: ${{ variables.location }}
-        parameters: 
-        templateFile: api.bicep
-      devOpsEnvironment: ${{ variables.boomiEnvironmentName }}
-      pool:
-        name: 'Azure Pipelines'
-      dependsOn:
-      - BicepDeploy
-      condition: succeeded()
+
