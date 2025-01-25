@@ -210,7 +210,7 @@ module managedEnvironment 'br/public:avm/res/app/managed-environment:0.8.1' = {
       systemAssigned: true
     }
     location: resourceGroup.location
-    platformReservedCidr: containerAppSubnetAddressPrefix
+    platformReservedCidr: platformReservedCidr
     platformReservedDnsIP: platformReservedDnsIP
     zoneRedundant: false
     storages: [
