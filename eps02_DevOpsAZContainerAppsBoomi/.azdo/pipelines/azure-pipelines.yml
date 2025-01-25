@@ -19,6 +19,16 @@ stages:
   variables:
   - group: boomi-dev 
   jobs:
+  - job: DebugBuildVars
+    displayName: Debug Variables in Build Stage
+    pool:
+      name: 'Azure Pipelines'
+    steps:
+      - script: |
+          echo "Azure Service Connection: ${{ variables.azureServiceConnection }}"
+          echo "Resource Group Name: ${{ variables.devResourceGroupName }}"
+          echo "Location: ${{ variables.location }}"
+        displayName: Debug Build Variables
   - template: stages/build-stage-bicep.yml
     parameters:
       artifacts:
