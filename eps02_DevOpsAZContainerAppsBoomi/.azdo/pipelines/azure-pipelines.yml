@@ -22,7 +22,7 @@ stages:
       artifacts:
         - name: bicep-artifact
           templateDirectory: infra
-      azureSubscription: ${{ variables.devAzureSubscription }}
+      azureSubscription: ${{ variables.subscriptionId }}
       bicep:
         templateFile: infra/main.bicep
       pool:
@@ -34,7 +34,7 @@ stages:
   variables:
   - group: boomi-dev
   jobs:
-  - template: stages/release-stage-bicep-function-app.yml
+  - template: stages/release-stage-bicep.yml
     parameters:
       name: 'BicepDeploy'
       azureSubscription:  ${{ variables.azureServiceConnection }}
@@ -54,7 +54,6 @@ stages:
       bicep: 
         artifactName: bicep-artifact
         parametersFile: main.parameters.dev.json
-        resourceGroupName: ${{ variables.devResourceGroupName }} 
         location: ${{ variables.location }}
         parameters: 
         templateFile: api.bicep

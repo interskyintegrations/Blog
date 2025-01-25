@@ -19,4 +19,4 @@ jobs:
                   scriptType: "bash"
                   scriptLocation: inlineScript
                   inlineScript: |
-                    az deployment group create -f $(Pipeline.Workspace)/${{parameters.bicep.artifactName}}/${{parameters.bicep.templateFile}} -g ${{parameters.bicep.resourceGroupName}} -p ${{parameters.bicep.parameters}} $(Pipeline.Workspace)/${{parameters.bicep.artifactName}}/${{parameters.bicep.parametersFile}}
+                    az deployment sub create -f $(Pipeline.Workspace)/${{parameters.bicep.artifactName}}/${{parameters.bicep.templateFile}} --location ${{parameters.bicep.location}}  -p ${{parameters.bicep.parameters}} $(Pipeline.Workspace)/${{parameters.bicep.artifactName}}/${{parameters.bicep.parametersFile}}
