@@ -13,46 +13,22 @@ pr: none
 # Use build definition name for build/release numbers
 name: $(BuildDefinitionName).$(Year:yy)$(DayOfYear)$(rev:.r)
 
-variables:
-- group: boomi-dev
-steps:
-- script: |
-    env
-  displayName: List Environment Variables
-
-- script: |
-    echo "Boomi Account ID: $BOOMIACCOUNTID"
-    echo "Boomi Environment Classification: $BOOMIENVIRONMENTCLASSIFICATION"
-    echo "Azure Resource Region: $AZURERESOURCEREGION"
-  displayName: Test Variable Group
-
-
 # Call the build process template
-# stages:
-# - stage: Build
-#   variables:
-#   - group: boomi-dev 
-#   jobs:
-#   - job: DebugBuildVars
-#     displayName: Debug Variables in Build Stage
-#     pool:
-#       name: 'Azure Pipelines'
-#     steps:
-#       - script: |
-#           echo "Azure Service Connection: ${{ variables.azureServiceConnection }}"
-#           echo "subscriptionId: ${{ variables.subscriptionId }}"
-#           echo "Location: ${{ variables.azureResourceRegion }}"
-#         displayName: Debug Build Variables
-  # - template: stages/build-stage-bicep.yml
-  #   parameters:
-  #     artifacts:
-  #       - name: bicep-artifact
-  #         templateDirectory: infra
-  #     azureSubscription: ${{ variables.azureServiceConnection }}
-  #     bicep:
-  #       templateFile: infra/main.bicep
-  #     pool:
-  #       name: 'Azure Pipelines'
+stages:
+- stage: Build
+  variables:
+  - group: boomi-dev 
+  jobs:
+  - template: stages/build-stage-bicep.yml
+    parameters:
+      artifacts:
+        - name: bicep-artifact
+          templateDirectory: infra
+      azureSubscription: ${{ variables.AZURESERVICECONNECTION }}
+      bicep:
+        templateFile: infra/main.bicep
+      pool:
+        name: 'Azure Pipelines'
 
 # - stage: Development 
 #   dependsOn: Build
