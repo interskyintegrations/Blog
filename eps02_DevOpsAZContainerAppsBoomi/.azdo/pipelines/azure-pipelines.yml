@@ -32,7 +32,7 @@ stages:
         artifacts:
           - name: bicep-artifact
             templateDirectory: infra
-        azureSubscription: ${{AZURESERVICECONNECTION}}
+        azureSubscription: serviceConnection-Development
         bicep:
           templateFile: infra/main.bicep
         pool:
