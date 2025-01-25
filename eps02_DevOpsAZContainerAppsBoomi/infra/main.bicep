@@ -53,6 +53,12 @@ param containerAppSubnetAddressPrefix string
 @description('Address range for the Storage Account Subnet')
 param storageAccountSubnetAddressPrefix string
 
+@description('Platform Reserved CIDR Block')
+param platformReservedCidr string
+
+@description('Platform Reserved DNS IP Address')
+param platformReservedDnsIP string
+
 // -------------------------------------
 // Boomi Parameters
 // -------------------------------------
@@ -196,7 +202,7 @@ module managedEnvironment 'br/public:avm/res/app/managed-environment:0.8.1' = {
     logAnalyticsWorkspaceResourceId: logAnalyticsWorkspace.outputs.resourceId
     name: managedEnvironmentName
     // Non-required parameters
-    dockerBridgeCidr: '172.16.0.1/28'
+    dockerBridgeCidr: '172.17.0.1/28'
     infrastructureResourceGroupName: resourceGroup.name
     infrastructureSubnetId: containerAppSubnetResourceId
     internal: true
@@ -204,8 +210,8 @@ module managedEnvironment 'br/public:avm/res/app/managed-environment:0.8.1' = {
       systemAssigned: true
     }
     location: resourceGroup.location
-    platformReservedCidr: '172.17.17.0/24'
-    platformReservedDnsIP: '172.17.17.17'
+    platformReservedCidr: containerAppSubnetAddressPrefix
+    platformReservedDnsIP: platformReservedDnsIP
     zoneRedundant: false
     storages: [
       {

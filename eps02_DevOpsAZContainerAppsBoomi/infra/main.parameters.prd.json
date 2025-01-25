@@ -43,6 +43,12 @@
     },
     "storageAccountSubnetAddressPrefix": {
       "value": "10.1.1.0/24"
+    },
+    "platformReservedCidr": {
+      "value": "172.18.17.0/24"
+    },
+    "platformReservedDnsIP": {
+      "value": "172.18.17.17"
     }
   }
 }
