@@ -28,11 +28,8 @@ jobs:
                     --parameters \
                       location="$(AZURERESOURCEREGION)" \
                       subscriptionId="$(SUBSCRIPTIONID)" \
-                      boomiAccountId="$(BOOMIACCOUNTID)" \
                       boomiAtomName="$(BOOMIATOMNAME)" \
-                      boomiAtomOrMolecule="$(BOOMIATOMORMOLECULE)" \
                       boomiContainerVersion="$(BOOMICONTAINERVERSION)" \
-                      boomiEnvironmentClassification="$(BOOMIENVIRONMENTCLASSIFICATION)" \
                       boomiEnvironmentId="$(BOOMIENVIRONMENTID)" \
                       boomiEnvironmentName="$(BOOMIENVIRONMENTNAME)" \
                       boomiInstallerToken="$(BOOMIINSTALLERTOKEN)"
