@@ -10,6 +10,9 @@ trigger:
 
 pr: none
 
+variables:
+  - group: boomi-dev 
+
 # Use build definition name for build/release numbers
 name: $(BuildDefinitionName).$(Year:yy)$(DayOfYear)$(rev:.r)
 
@@ -29,16 +32,16 @@ stages:
           echo "subscriptionId: ${{ variables.subscriptionId }}"
           echo "Location: ${{ variables.azureResourceRegion }}"
         displayName: Debug Build Variables
-  - template: stages/build-stage-bicep.yml
-    parameters:
-      artifacts:
-        - name: bicep-artifact
-          templateDirectory: infra
-      azureSubscription: ${{ variables.azureServiceConnection }}
-      bicep:
-        templateFile: infra/main.bicep
-      pool:
-        name: 'Azure Pipelines'
+  # - template: stages/build-stage-bicep.yml
+  #   parameters:
+  #     artifacts:
+  #       - name: bicep-artifact
+  #         templateDirectory: infra
+  #     azureSubscription: ${{ variables.azureServiceConnection }}
+  #     bicep:
+  #       templateFile: infra/main.bicep
+  #     pool:
+  #       name: 'Azure Pipelines'
 
 - stage: Development 
   dependsOn: Build
