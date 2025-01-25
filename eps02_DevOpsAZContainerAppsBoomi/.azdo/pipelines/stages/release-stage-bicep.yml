@@ -19,21 +19,21 @@ jobs:
                 scriptType: "bash"
                 scriptLocation: inlineScript
                 inlineScript: |
-                 echo "Deploying Bicep template with dynamic parameters and static parameter file..."
+                  echo "Deploying Bicep template with dynamic parameters and static parameter file..."
                   az deployment sub create \
                     --name ${{ parameters.name }} \
-                    --location $(AZURERESOURCEREGION) \  # Dynamic from boomi-dev
-                    --template-file $(Pipeline.Workspace)/${{ parameters.bicep.artifactName }}/${{ parameters.bicep.templateFile }} \
-                    --parameters @$(Pipeline.Workspace)/${{ parameters.bicep.artifactName }}/$(BICEPPARAMETERFILE) \ 
+                    --location "$(AZURERESOURCEREGION)" \
+                    --template-file "$(Pipeline.Workspace)/${{ parameters.bicep.artifactName }}/${{ parameters.bicep.templateFile }}" \
+                    --parameters @"$(Pipeline.Workspace)/${{ parameters.bicep.artifactName }}/$(BICEPPARAMETERFILE)" \
                     --parameters \
-                      location=$(AZURERESOURCEREGION) \
-                      subscriptionId=$(SUBSCRIPTIONID) \
-                      boomiAccountId=$(BOOMIACCOUNTID) \
-                      boomiAtomName=$(BOOMIATOMNAME) \
-                      boomiAtomOrMolecule=$(BOOMIATOMORMOLECULE) \
-                      boomiContainerVersion=$(BOOMICONTAINERVERSION) \
-                      boomiEnvironmentClassification=$(BOOMIENVIRONMENTCLASSIFICATION) \
-                      boomiEnvironmentId=$(BOOMIENVIRONMENTID) \
-                      boomiEnvironmentName=$(BOOMIENVIRONMENTNAME)\
-                      boomiInstallerToken=$(BOOMIINSTALLERTOKEN)
+                      location="$(AZURERESOURCEREGION)" \
+                      subscriptionId="$(SUBSCRIPTIONID)" \
+                      boomiAccountId="$(BOOMIACCOUNTID)" \
+                      boomiAtomName="$(BOOMIATOMNAME)" \
+                      boomiAtomOrMolecule="$(BOOMIATOMORMOLECULE)" \
+                      boomiContainerVersion="$(BOOMICONTAINERVERSION)" \
+                      boomiEnvironmentClassification="$(BOOMIENVIRONMENTCLASSIFICATION)" \
+                      boomiEnvironmentId="$(BOOMIENVIRONMENTID)" \
+                      boomiEnvironmentName="$(BOOMIENVIRONMENTNAME)" \
+                      boomiInstallerToken="$(BOOMIINSTALLERTOKEN)"
 
