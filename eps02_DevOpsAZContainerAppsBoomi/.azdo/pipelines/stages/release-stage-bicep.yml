@@ -31,6 +31,5 @@ jobs:
                       boomiAtomName="$(BOOMIATOMNAME)" \
                       boomiContainerVersion="$(BOOMICONTAINERVERSION)" \
                       boomiEnvironmentId="$(BOOMIENVIRONMENTID)" \
-                      boomiEnvironmentName="$(BOOMIENVIRONMENTNAME)" \
                       boomiInstallerToken="$(BOOMIINSTALLERTOKEN)"
 
