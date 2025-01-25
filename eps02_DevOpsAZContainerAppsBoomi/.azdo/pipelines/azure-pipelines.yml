@@ -57,7 +57,7 @@ stages:
         location: ${{ variables.location }}
         parameters: 
         templateFile: api.bicep
-      devOpsEnvironment: ${{ variables.devDevopsEnvironment }}
+      devOpsEnvironment: ${{ variables.boomiEnvironmentName }}
       pool:
         name: 'Azure Pipelines'
       dependsOn:
