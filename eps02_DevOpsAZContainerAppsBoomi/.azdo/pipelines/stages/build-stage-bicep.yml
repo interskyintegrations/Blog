@@ -11,7 +11,7 @@ jobs:
     - task: AzureCLI@2
       displayName: Azure CLI Bicep Build
       inputs:
-        azureSubscription: serviceConnection-Development # ${{parameters.azureSubscription}}
+        azureSubscription: ${{parameters.azureSubscription}}
         scriptType: "bash"
         scriptLocation: inlineScript
         inlineScript: |
