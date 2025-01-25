@@ -7,8 +7,13 @@ trigger:
     include:    
     - main
     - feature/*
-
+    paths:
+      include:
+      - eps02_DevOpsAZContainerAppsBoomi/*
 pr: none
+
+variables:
+  - group: boomi-dev 
 
 # Use build definition name for build/release numbers
 name: $(BuildDefinitionName).$(Year:yy)$(DayOfYear)$(rev:.r)
@@ -16,17 +21,8 @@ name: $(BuildDefinitionName).$(Year:yy)$(DayOfYear)$(rev:.r)
 # Call the build process template
 stages:
 - stage: Build
-  variables:
-  - group: boomi-dev 
+
   jobs:
-    - job: ListAllVars
-      displayName: List All Variables
-      pool:
-        name: 'Azure Pipelines'
-      steps:
-      - script: |
-          echo "Listing all environment variables:"
-          printenv | sort
     - template: stages/build-stage-bicep.yml
       parameters:
         artifacts:
@@ -34,7 +30,7 @@ stages:
             templateDirectory: infra
         azureSubscription: serviceConnection-Development
         bicep:
-          templateFile: infra/main.bicep
+          templateFile: eps02_DevOpsAZContainerAppsBoomi/infra/main.bicep
         pool:
           name: 'Azure Pipelines'
 
