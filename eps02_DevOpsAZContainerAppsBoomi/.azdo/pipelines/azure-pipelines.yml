@@ -32,7 +32,7 @@ stages:
         artifacts:
           - name: bicep-artifact
             templateDirectory: infra
-        azureSubscription: ${{ variables.boomi-dev.AZURESERVICECONNECTION }}
+        azureSubscription: ${{ variables.AZURESERVICECONNECTION }}
         bicep:
           templateFile: infra/main.bicep
         pool:
