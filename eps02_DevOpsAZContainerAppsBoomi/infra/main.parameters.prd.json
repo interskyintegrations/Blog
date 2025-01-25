@@ -9,10 +9,10 @@
       "value": "boomi-demo-prd-vnet"
     },
     "containerAppSubnetName": {
-      "value": "ca-subnetName"
+      "value": "ca-subnetname"
     },
     "storageAccountSubnetName": {
-      "value": "sa-subnetName"
+      "value": "sa-subnetname"
     },
     "storageAccountName": {
       "value": "boomidemoprdsa"
@@ -25,6 +25,9 @@
     },
     "managedEnvironmentName": {
       "value": "boomidemoprdmenv"
+    },
+    "resourceGroupName": {
+      "value": "rg-demo-prd"
     }
   }
 }

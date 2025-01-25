@@ -25,6 +25,9 @@
     },
     "managedEnvironmentName": {
       "value": "boomidemodevmenv"
+    },
+    "resourceGroupName": {
+      "value": "rg-demo-dev"
     }
   }
 }
