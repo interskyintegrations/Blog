@@ -8,6 +8,9 @@ targetScope = 'subscription'
 @description('Subscription ID of the environment')
 param subscriptionId string
 
+@description('Name of the environment')
+param environmentName string
+
 @description('Name of the new Resource Group to create')
 param resourceGroupName string
 
