@@ -28,7 +28,7 @@ stages:
         artifacts:
           - name: bicep-artifact
             templateDirectory: infra
-        azureSubscription: ${{variables.AZURESERVICECONNECTION}}
+        azureSubscription: $(AZURESERVICECONNECTION)
         bicep:
           templateFile: eps02_DevOpsAZContainerAppsBoomi/infra/main.bicep
         pool:
