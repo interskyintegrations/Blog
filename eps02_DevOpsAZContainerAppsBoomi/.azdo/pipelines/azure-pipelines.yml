@@ -17,9 +17,9 @@ variables:
 - group: boomi-dev
 steps:
 - script: |
-    echo "Azure Service Connection: $(azureServiceConnection)"
-    echo "Resource Group Name: $(devResourceGroupName)"
-    echo "Location: $(location)"
+     echo "Azure Service Connection: ${{ variables.azureServiceConnection }}"
+      echo "subscriptionId: ${{ variables.subscriptionId }}"
+     echo "Location: ${{ variables.azureResourceRegion }}"
   displayName: Test Variable Group
 
 
