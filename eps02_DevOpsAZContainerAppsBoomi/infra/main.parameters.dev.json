@@ -27,7 +27,7 @@
       "value": "boomidemodvmenv"
     },
     "resourceGroupName": {
-      "value": "rg-demo-dev"
+      "value": "rg-demo-containerapps-dev"
     },
     "boomiAtomName": {
       "value": "BoomiAtomDev"
