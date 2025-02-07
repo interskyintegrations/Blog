@@ -24,7 +24,7 @@
       "value": "boomi-demo-prd-appinsight"
     },
     "managedEnvironmentName": {
-      "value": "boomidemoprdmenv"
+      "value": "boomidemoprodmenv"
     },
     "resourceGroupName": {
       "value": "rg-demo-prd"

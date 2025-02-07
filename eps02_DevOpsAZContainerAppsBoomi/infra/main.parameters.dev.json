@@ -9,10 +9,10 @@
       "value": "boomi-demo-dev-vnet"
     },
     "containerAppSubnetName": {
-      "value": "ca-subnetName-dev"
+      "value": "ca-subnetname-dev"
     },
     "storageAccountSubnetName": {
-      "value": "sa-subnetName-dev"
+      "value": "sa-subnetname-dev"
     },
     "storageAccountName": {
       "value": "boomidemodevsa"
@@ -24,7 +24,7 @@
       "value": "boomi-demo-dev-appinsight"
     },
     "managedEnvironmentName": {
-      "value": "boomidemodevmenv"
+      "value": "boomidemodvmenv"
     },
     "resourceGroupName": {
       "value": "rg-demo-dev"
@@ -45,10 +45,10 @@
       "value": "10.0.2.0/23"
     },
     "platformReservedCidr": {
-      "value": "172.22.0.1/24"
+      "value": "172.22.0.0/24"
     },
     "platformReservedDnsIP": {
-      "value": "172.22.0.2"
+      "value": "172.22.0.10"
     }
   }
 }
