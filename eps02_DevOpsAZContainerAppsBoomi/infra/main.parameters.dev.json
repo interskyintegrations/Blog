@@ -24,7 +24,7 @@
       "value": "boomi-demo-dev-appinsight"
     },
     "managedEnvironmentName": {
-      "value": "boomidemodevmenv"
+      "value": "boomidemodvmenv"
     },
     "resourceGroupName": {
       "value": "rg-demo-containerapps-dev"
