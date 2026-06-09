@@ -84,7 +84,7 @@ The [`main.parameters.json`](./main.parameters.json) file contains the parameter
 
 ## Deployment Info
 More info on my blog: [Boomi & Azure Hybrid Environment – Episode 1: How to install a Boomi Atom or Molecule on Azure Container Apps using AVM Bicep templates
-](https://intersky.nl/boomi-azure-hybrid-environment-episode-1-how-to-install-a-boomi-atom-or-molecule-on-azure-container-app-using-avm-bicep-templates/)
+](https://jandaris.nl/boomi-azure-hybrid-environment-episode-1-how-to-install-a-boomi-atom-or-molecule-on-azure-container-app-using-avm-bicep-templates/)
 
 ## Contact
 

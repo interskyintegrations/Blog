@@ -1,0 +1,33 @@
+<!--
+    - Policies are applied in the order they appear.
+    - Position <base/> inside a section to inherit policies from the outer scope.
+    - Comments within policies are not preserved.
+-->
+<!-- Add policies as children to the <inbound>, <outbound>, <backend>, and <on-error> elements -->
+<policies>
+    <!-- Throttle, authorize, validate, cache, or transform the requests -->
+    <inbound>
+        <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Access token is missing or invalid." require-scheme="Bearer">
+            <openid-config url="https://login.microsoftonline.com/{{tenantid}}/v2.0/.well-known/openid-configuration" />
+            <audiences>
+                <audience>api://{{clientid}}</audience>
+                <audience>{{clientid}}</audience>
+            </audiences>
+            <issuers>
+                <issuer>https://login.microsoftonline.com/{{tenantid}}/v2.0</issuer>
+                <issuer>https://sts.windows.net/{{tenantid}}/</issuer>
+            </issuers>
+        </validate-jwt>
+        <mock-response status-code="200" content-type="application/json" />
+        <base />
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
