@@ -1,0 +1,21 @@
+<policies>
+    <inbound>
+        <base />
+        <validate-content unspecified-content-type-action="ignore" max-size="1048576"
+            size-exceeded-action="prevent" errors-variable-name="requestValidationErrors">
+            <content-type-map any-content-type-value="application/json" />
+            <content type="application/json" validate-as="json" action="prevent"
+                schema-id="system-b-order" allow-additional-properties="false" />
+        </validate-content>
+        <mock-response status-code="201" content-type="application/json" />
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>

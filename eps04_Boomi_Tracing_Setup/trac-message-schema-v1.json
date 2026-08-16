@@ -1,0 +1,201 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "traceLogMessage",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this log entry (random GUID)"
+    },
+    "correlationId": {
+      "type": "string",
+      "description": "Correlation identifier (GUID). Within Boomi: DPP_CorrelationId"
+    },
+    "activityId": {
+      "type": "string",
+      "description": "Unique identifier for the parent session. Within Boomi: DDP_ActivityId"
+    },
+    "registrationTsp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when this log entry was created (UTC). Within Boomi: DDP_RegistrationTsp"
+    },
+    "interfaceCode": {
+      "type": "string",
+      "description": "Interface code (e.g. IF0001). Within Boomi: DPP_InterfaceCode"
+    },
+    "interfaceName": {
+      "type": "string",
+      "description": "Optional interface name. Within Boomi: DPP_InterfaceName"
+    },
+    "parentStatus": {
+      "type": "string",
+      "enum": [
+        "RUNNING",
+        "SUCCESS",
+        "WARNING",
+        "FAILED",
+        "FATAL"
+      ],
+      "description": "Overall session status. Within Boomi: DDP_ParentStatus"
+    },
+    "startTsp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start time for this session. Within Boomi: DDP_StartTsp"
+    },
+    "endTsp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End time if session is completed. Within Boomi: DDP_EndTsp"
+    },
+    "sourceSystemCode": {
+      "type": "string",
+      "description": "Source system code (2–3 characters). Within Boomi: DPP_SourceSystemCode"
+    },
+    "targetSystemCode": {
+      "type": "string",
+      "description": "Target system code (2–5 characters). Within Boomi: DPP_TargetSystemCode"
+    },
+    "domainCode": {
+      "type": "string",
+      "description": "Domain code (2–5 characters) for example PART for participation. Within Boomi: DPP_DomainCode"
+    },
+    "action": {
+      "type": "string",
+      "description": "Action description. Within Boomi: DDP_Action"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "INFO",
+        "WARNING",
+        "ERROR",
+        "DEBUG",
+        "TRACE"
+      ],
+      "description": "Log severity level. Within Boomi: DDP_Severity"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "WARNING",
+        "FAILED",
+        "FATAL"
+      ],
+      "description": "Status of this log entry. Within Boomi: DDP_Status"
+    },
+    "boomiAccountId": {
+      "type": "string",
+      "description": "Run identifier (optional). Within Boomi: DPP_BoomiAccountId"
+    },
+    "boomiRuntimeId": {
+      "type": "string",
+      "description": "Run identifier (optional). Within Boomi: DPP_BoomiRuntimeId"
+    },
+    "boomiRuntimeName": {
+      "type": "string",
+      "description": "Deployment environment. Within Boomi: DPP_BoomiRuntimeName"
+    },
+    "boomiExecutionId": {
+      "type": "string",
+      "description": "Run identifier (optional). Within Boomi: DPP_BoomiExecutionId"
+    },
+    "boomiNodeId": {
+      "type": "string",
+      "description": "Run identifier (optional). Within Boomi: DPP_BoomiNodeId"
+    },
+    "boomiProcessId": {
+      "type": "string",
+      "description": "Run identifier (optional). Within Boomi: DPP_BoomiProcessId"
+    },
+    "boomiProcessName": {
+      "type": "string",
+      "description": "Run identifier (optional). Within Boomi: DPP_BoomiProcessName"
+    },
+    "schemaVersion": {
+      "type": "string",
+      "description": "Version of this schema, e.g. '1.0'. Within Boomi DPP_SchemaVersion"
+    },
+    "traceTimestamp": {
+      "type": "string",
+       "format": "date-time",
+      "description": "Timestamp when the trace is created"
+    },
+    "metadata": {
+      "type": "array",
+      "description": "Optional metadata key/value pairs.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Metadata key (can be empty)."
+          },
+          "value": {
+            "type": "string",
+            "description": "Metadata value (can be empty)."
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "correlationId",
+    "activityId",
+    "registrationTsp",
+    "interfaceCode",
+    "parentStatus",
+    "sourceSystemCode",
+    "targetSystemCode",
+    "domainCode",
+    "severity",
+    "status",
+    "schemaVersion",
+    "traceTimestamp"
+  ],
+  "examples": [
+    {
+      "id": "7ac41e92-1f1f-4a2b-8a2f-56a7c222ab33",
+      "correlationId": "c3b2f1d1-3b1a-4e2d-812a-456789abc111",
+      "activityId": "c3b2f1d1-3b1a-4e2d-812a-456789abcdef",
+      "registrationTsp": "2026-08-03T20:45:00Z",
+      "interfaceCode": "IF0001",
+      "interfaceName": "MAIN IF0001 SFEV > CDM Order",
+      "parentStatus": "RUNNING",
+      "startTsp": "2026-08-03T20:45:00Z",
+      "endTsp": "2026-08-03T20:47:00Z",
+      "sourceSystemCode": "SFEV",
+      "targetSystemCode": "CDM",
+      "domainCode": "ORDER",
+      "action": "Started processing order",
+      "severity": "INFO",
+      "status": "SUCCESS",
+      "boomiAccountId": "1234",
+      "boomiRuntimeId": "1234",
+      "boomiRuntimeName": "test-boomi-runtime",
+      "boomiExecutionId": "0dd93fd5-9ece-44a0-9330-e4fb4f69ef5b",
+      "boomiNodeId": "node-01",
+      "boomiProcessId": "proc-abc123",
+      "boomiProcessName": "MAIN IF0001 SFEV > CDM Order",
+      "schemaVersion": "1.0",
+      "traceTimestamp":"2025-08-03T20:45:00Z",
+      "metadata": [
+        {
+          "key": "orderId",
+          "value": "123"
+        },
+         {
+          "key": "customerId",
+          "value": "789"
+        }
+      ]
+    }
+  ]
+}
