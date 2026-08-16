@@ -1,0 +1,190 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://intersky.nl/schemas/system-b-order.schema.json",
+  "title": "System B Order",
+  "description": "Order message accepted by System B. The core schema mirrors System A so Boomi can map it directly while retaining functional-tracing identifiers.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "orderId",
+    "orderDate",
+    "receivedAt",
+    "orderStatus",
+    "customer",
+    "currency",
+    "orderLines",
+    "shippingAddress"
+  ],
+  "properties": {
+    "orderId": {
+      "type": "string",
+      "pattern": "^SO-[0-9]+$",
+      "description": "Same business key received from System A.",
+      "examples": [
+        "SO-1042"
+      ]
+    },
+    "orderDate": {
+      "type": "string",
+      "format": "date-time",
+      "examples": [
+        "2026-08-15T09:41:03Z"
+      ]
+    },
+    "receivedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp added by System B when the mapped order is received.",
+      "examples": [
+        "2026-08-15T09:41:05Z"
+      ]
+    },
+    "orderStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING_FULFILLMENT",
+        "REJECTED"
+      ],
+      "examples": [
+        "PENDING_FULFILLMENT"
+      ]
+    },
+    "customer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "customerId",
+        "name"
+      ],
+      "properties": {
+        "customerId": {
+          "type": "string",
+          "examples": [
+            "CUST-2048"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "examples": [
+            "Northwind Retail"
+          ]
+        }
+      }
+    },
+    "currency": {
+      "type": "string",
+      "enum": [
+        "EUR"
+      ],
+      "examples": [
+        "EUR"
+      ]
+    },
+    "orderLines": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "lineNumber",
+          "itemCode",
+          "description",
+          "quantity",
+          "unitPrice"
+        ],
+        "properties": {
+          "lineNumber": {
+            "type": "integer",
+            "minimum": 1,
+            "examples": [
+              1
+            ]
+          },
+          "itemCode": {
+            "type": "string",
+            "examples": [
+              "WIDGET-BLUE-01"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "examples": [
+              "Blue Widget"
+            ]
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 1,
+            "examples": [
+              2
+            ]
+          },
+          "unitPrice": {
+            "type": "number",
+            "minimum": 0,
+            "examples": [
+              49.95
+            ]
+          }
+        }
+      }
+    },
+    "shippingAddress": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "countryCode",
+        "city"
+      ],
+      "properties": {
+        "countryCode": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$",
+          "examples": [
+            "NL"
+          ]
+        },
+        "city": {
+          "type": "string",
+          "examples": [
+            "Amsterdam"
+          ]
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "orderId": "SO-1042",
+      "orderDate": "2026-08-15T09:41:03Z",
+      "receivedAt": "2026-08-15T09:41:05Z",
+      "orderStatus": "PENDING_FULFILLMENT",
+      "customer": {
+        "customerId": "CUST-2048",
+        "name": "Northwind Retail"
+      },
+      "currency": "EUR",
+      "orderLines": [
+        {
+          "lineNumber": 1,
+          "itemCode": "WIDGET-BLUE-01",
+          "description": "Blue Widget",
+          "quantity": 2,
+          "unitPrice": 49.95
+        },
+        {
+          "lineNumber": 2,
+          "itemCode": "CABLE-USB-C-02",
+          "description": "USB-C Cable",
+          "quantity": 1,
+          "unitPrice": 19.95
+        }
+      ],
+      "shippingAddress": {
+        "countryCode": "NL",
+        "city": "Amsterdam"
+      }
+    }
+  ]
+}
